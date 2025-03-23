@@ -27,6 +27,15 @@ frontend:
       headers:
         - key: 'Cache-Control'
           value: 'public, max-age=31536000, immutable'
+  # Add redirects for client-side routing
+  customRules:
+    - pattern: '**/*'
+      target: '/index.html'
+      status: '200'
+      condition: null
+    - pattern: 'api/*'
+      target: '/api/:splat'
+      status: '200'
   cache:
     paths:
       - node_modules/**/*
