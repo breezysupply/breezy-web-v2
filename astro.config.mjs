@@ -9,8 +9,7 @@ export default defineConfig({
   integrations: [react(), tailwind()],
   output: 'hybrid',
   adapter: node({
-    mode: 'standalone',
-    host: '0.0.0.0'
+    mode: 'standalone'
   }),
   build: {
     client: './dist/client',
