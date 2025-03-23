@@ -20,6 +20,7 @@ frontend:
       headers:
         - key: 'Cache-Control'
           value: 'no-cache'
+  appRoot: dist
   cache:
     paths:
       - node_modules/**/* 
