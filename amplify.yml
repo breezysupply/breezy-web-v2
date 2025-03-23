@@ -27,4 +27,7 @@ frontend:
   appRoot: dist
   cache:
     paths:
-      - node_modules/**/* 
+      - node_modules/**/*
+  environment:
+    variables:
+      NODE_ENV: production 
