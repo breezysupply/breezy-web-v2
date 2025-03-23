@@ -5,8 +5,8 @@ frontend:
       commands:
         - nvm install 18.19.0
         - nvm use 18.19.0
-        - npm install @astrojs/node
-        - npm ci
+        - npm install @astrojs/node --legacy-peer-deps
+        - npm ci --legacy-peer-deps
     build:
       commands:
         - npm run build
