@@ -22,11 +22,42 @@ app.use((req, res, next) => {
   next();
 });
 
-// Serve static files
-app.use(express.static(__dirname));
+// Set correct MIME types for JavaScript modules
+app.use((req, res, next) => {
+  if (req.url.endsWith('.js')) {
+    res.type('application/javascript');
+  } else if (req.url.endsWith('.css')) {
+    res.type('text/css');
+  } else if (req.url.endsWith('.json')) {
+    res.type('application/json');
+  }
+  next();
+});
+
+// Serve static files with proper MIME types
+app.use(express.static(__dirname, {
+  setHeaders: (res, path) => {
+    if (path.endsWith('.js')) {
+      res.setHeader('Content-Type', 'application/javascript');
+    } else if (path.endsWith('.css')) {
+      res.setHeader('Content-Type', 'text/css');
+    } else if (path.endsWith('.json')) {
+      res.setHeader('Content-Type', 'application/json');
+    }
+  }
+}));
 
 // SPA fallback - send index.html for all routes
 app.get('*', (req, res) => {
+  // Skip API routes and asset files
+  if (req.url.startsWith('/api/') || 
+      req.url.includes('/_astro/') || 
+      req.url.endsWith('.js') || 
+      req.url.endsWith('.css') || 
+      req.url.endsWith('.json')) {
+    return next();
+  }
+  
   // First check if the exact path exists
   const filePath = path.join(__dirname, req.path);
   if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
