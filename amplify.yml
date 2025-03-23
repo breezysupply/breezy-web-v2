@@ -11,9 +11,9 @@ frontend:
         - npm run build
     postBuild:
       commands:
+        - ls -la dist/
         - cp src/entry.js dist/
         - cp package.json dist/
-        - cp -r dist/client/* dist/
   artifacts:
     baseDirectory: dist
     files:
