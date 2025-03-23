@@ -31,10 +31,11 @@ const Navigation = () => {
       
       <ul className="space-y-3 mb-auto">
         {[
-          { path: '/work', label: 'Work' },
-          { path: '/notes', label: 'Notes' },
-          { path: '/training', label: 'Training' },
-          { path: '/moments', label: 'Moments' }
+          { path: '/index.html', label: 'Home' },
+          { path: '/work/index.html', label: 'Work' },
+          { path: '/notes/index.html', label: 'Notes' },
+          { path: '/training/index.html', label: 'Training' },
+          { path: '/moments/index.html', label: 'Moments' }
         ].map(({ path, label }, index) => (
           <li key={path}>
             <a 

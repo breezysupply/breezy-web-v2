@@ -33,39 +33,46 @@ try {
   app.use((req, res, next) => {
     const start = Date.now();
     console.log(`Request started: ${req.method} ${req.url}`);
-    res.on('finish', () => {
-      const duration = Date.now() - start;
-      console.log(
-        `${new Date().toISOString()} - ${req.method} ${req.url} - Status: ${res.statusCode} - Duration: ${duration}ms`
-      );
-      if (res.statusCode === 404) {
-        console.warn('404 Not Found Details:', {
-          url: req.url,
-          headers: req.headers,
-          method: req.method,
-          path: req.path,
-          query: req.query
-        });
-      }
-    });
     next();
   });
 
   // IMPORTANT: Serve static files from the client directory with correct path
   app.use(express.static(path.join(__dirname, 'client')));
   
-  // Special handling for direct HTML requests
-  app.get('/*.html', (req, res, next) => {
-    const htmlPath = path.join(__dirname, 'client', req.path);
-    if (fs.existsSync(htmlPath)) {
-      res.sendFile(htmlPath);
-    } else {
-      next();
-    }
+  // Add specific routes for each page to debug
+  app.get('/work', (req, res, next) => {
+    console.log('Work route hit directly');
+    next();
+  });
+  
+  app.get('/moments', (req, res, next) => {
+    console.log('Moments route hit directly');
+    next();
+  });
+  
+  app.get('/notes', (req, res, next) => {
+    console.log('Notes route hit directly');
+    next();
+  });
+  
+  app.get('/info', (req, res, next) => {
+    console.log('Info route hit directly');
+    next();
   });
   
   // Handle all routes with Astro handler
   app.use(handler);
+
+  // Log response completion
+  app.use((req, res, next) => {
+    res.on('finish', () => {
+      const duration = Date.now() - req.start;
+      console.log(
+        `${new Date().toISOString()} - ${req.method} ${req.url} - Status: ${res.statusCode} - Duration: ${duration}ms`
+      );
+    });
+    next();
+  });
 
   // Error handling middleware
   app.use((err, req, res, next) => {
