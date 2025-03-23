@@ -23,25 +23,46 @@ console.log('Environment:', {
   PORT: port,
   HOST: host,
   __dirname,
-  cwd: process.cwd()
+  cwd: process.cwd(),
+  staticPath: path.join(__dirname, '../client')
 });
 
 try {
-  // Serve static files from the client directory
-  app.use(express.static(path.join(__dirname, '../client')));
-
-  // Add request logging
+  // Enhanced request logging
   app.use((req, res, next) => {
-    console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+    const start = Date.now();
+    res.on('finish', () => {
+      const duration = Date.now() - start;
+      console.log(
+        `${new Date().toISOString()} - ${req.method} ${req.url} - Status: ${res.statusCode} - Duration: ${duration}ms`
+      );
+      if (res.statusCode === 404) {
+        console.warn('404 Not Found Details:', {
+          url: req.url,
+          headers: req.headers,
+          method: req.method,
+          path: req.path,
+          query: req.query
+        });
+      }
+    });
     next();
   });
+
+  // Serve static files from the client directory
+  app.use(express.static(path.join(__dirname, '../client')));
 
   // Handle all routes with Astro
   app.use(handler);
 
   // Error handling middleware
   app.use((err, req, res, next) => {
-    console.error('Error:', err);
+    console.error('Error:', {
+      error: err,
+      url: req.url,
+      method: req.method,
+      headers: req.headers
+    });
     res.status(500).send('Internal Server Error');
   });
 
