@@ -1,4 +1,3 @@
-import { handler } from './server/entry.mjs';
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -9,86 +8,41 @@ const app = express();
 const port = process.env.PORT || 8080;
 const host = process.env.HOST || '0.0.0.0';
 
-// Add startup error handling
-process.on('uncaughtException', (error) => {
-  console.error('Uncaught Exception:', error);
-});
-
-process.on('unhandledRejection', (error) => {
-  console.error('Unhandled Rejection:', error);
-});
-
-// Log environment and paths
-console.log('Environment:', {
+console.log('Starting server with environment:', {
   NODE_ENV: process.env.NODE_ENV,
   PORT: port,
   HOST: host,
   __dirname,
-  cwd: process.cwd(),
-  staticPath: path.join(__dirname, 'client')
+  cwd: process.cwd()
 });
 
-try {
-  // Enhanced request logging
-  app.use((req, res, next) => {
-    const start = Date.now();
-    console.log(`Request started: ${req.method} ${req.url}`);
-    next();
-  });
+// Simple request logging
+app.use((req, res, next) => {
+  console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+  next();
+});
 
-  // IMPORTANT: Serve static files from the client directory with correct path
-  app.use(express.static(path.join(__dirname, 'client')));
-  
-  // Add specific routes for each page to debug
-  app.get('/work', (req, res, next) => {
-    console.log('Work route hit directly');
-    next();
-  });
-  
-  app.get('/moments', (req, res, next) => {
-    console.log('Moments route hit directly');
-    next();
-  });
-  
-  app.get('/notes', (req, res, next) => {
-    console.log('Notes route hit directly');
-    next();
-  });
-  
-  app.get('/info', (req, res, next) => {
-    console.log('Info route hit directly');
-    next();
-  });
-  
-  // Handle all routes with Astro handler
-  app.use(handler);
+// Serve static files
+app.use(express.static(__dirname));
 
-  // Log response completion
-  app.use((req, res, next) => {
-    res.on('finish', () => {
-      const duration = Date.now() - req.start;
-      console.log(
-        `${new Date().toISOString()} - ${req.method} ${req.url} - Status: ${res.statusCode} - Duration: ${duration}ms`
-      );
-    });
-    next();
-  });
+// SPA fallback - send index.html for all routes
+app.get('*', (req, res) => {
+  // First check if the exact path exists
+  const filePath = path.join(__dirname, req.path);
+  if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
+    return res.sendFile(filePath);
+  }
+  
+  // Then check if there's an index.html in the path
+  const indexPath = path.join(__dirname, req.path, 'index.html');
+  if (fs.existsSync(indexPath)) {
+    return res.sendFile(indexPath);
+  }
+  
+  // Finally, fall back to the root index.html
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
 
-  // Error handling middleware
-  app.use((err, req, res, next) => {
-    console.error('Error:', {
-      error: err,
-      url: req.url,
-      method: req.method,
-      headers: req.headers
-    });
-    res.status(500).send('Internal Server Error');
-  });
-
-  app.listen(port, host, () => {
-    console.log(`Server running on http://${host}:${port}`);
-  });
-} catch (error) {
-  console.error('Failed to start server:', error);
-  process.exit(1);
-} 
+app.listen(port, host, () => {
+  console.log(`Server running on http://${host}:${port}`);
+}); 
