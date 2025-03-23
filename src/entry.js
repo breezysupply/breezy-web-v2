@@ -9,7 +9,7 @@ const port = process.env.PORT || 8080;
 const host = process.env.HOST || '0.0.0.0';
 
 // Serve static files from the client directory
-app.use(express.static(path.join(__dirname, '../client')));
+app.use(express.static(path.join(__dirname, 'client')));
 
 // Add request logging
 app.use((req, res, next) => {

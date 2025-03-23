@@ -13,8 +13,6 @@ frontend:
       commands:
         - cp src/entry.js dist/
         - cp package.json dist/
-        - mkdir -p dist/client
-        - cp -r dist/client/* dist/client/
   artifacts:
     baseDirectory: dist
     files:
