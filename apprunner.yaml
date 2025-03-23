@@ -5,14 +5,19 @@ build:
     build:
       - npm ci --legacy-peer-deps
       - npm run build
+      - cp src/entry.js dist/
 run:
   runtime-version: 18.19.0
-  command: node src/entry.js
+  command: node dist/entry.js
   network:
     port: 8080
   env:
     - name: NODE_ENV
       value: production
+    - name: PORT
+      value: "8080"
+    - name: HOST
+      value: "0.0.0.0"
     # Don't put secrets here!
     # - name: S3_ACCESS_KEY_ID
     #   value: your_access_key 
