@@ -1,34 +1,3 @@
 [
-  {
-    "content": "test",
-    "tags": [
-      "train more"
-    ],
-    "daysAgo": 0,
-    "stats": [
-      {
-        "label": "ha",
-        "value": "2"
-      }
-    ],
-    "createdAt": "2025-03-23T00:22:35.391Z"
-  },
-  {
-    "content": "work it",
-    "tags": [
-      "cardio"
-    ],
-    "daysAgo": 1,
-    "stats": [
-      {
-        "label": "distance",
-        "value": "5 miles"
-      },
-      {
-        "label": "pace",
-        "value": "8 min/mile"
-      }
-    ],
-    "createdAt": "2025-03-23T00:22:35.391Z"
-  }
+
 ]
