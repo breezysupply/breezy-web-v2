@@ -5,6 +5,7 @@ frontend:
       commands:
         - nvm install 18.19.0
         - nvm use 18.19.0
+        - npm install @astrojs/node
         - npm ci
     build:
       commands:
