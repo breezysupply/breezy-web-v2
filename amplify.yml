@@ -3,7 +3,6 @@ frontend:
   phases:
     preBuild:
       commands:
-        - nvm install 18.19.0
         - nvm use 18.19.0
         - npm ci --legacy-peer-deps
     build:
@@ -11,19 +10,22 @@ frontend:
         - npm run build
     postBuild:
       commands:
+        - mkdir -p dist
         - cp src/entry.js dist/
         - cp package.json dist/
   artifacts:
     baseDirectory: dist
     files:
       - '**/*'
-    disableGeneratedBaseDirectory: true
   customHeaders:
     - pattern: '**/*'
       headers:
         - key: 'Cache-Control'
           value: 'no-cache'
-  appRoot: dist
+    - pattern: '_astro/*'
+      headers:
+        - key: 'Cache-Control'
+          value: 'public, max-age=31536000, immutable'
   cache:
     paths:
       - node_modules/**/*
