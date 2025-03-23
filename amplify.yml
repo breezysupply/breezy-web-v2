@@ -15,11 +15,32 @@ frontend:
         - cp src/entry.js dist/
         - cp package.json dist/
         - cp rewrites.json dist/
+        - cp customHttp.yml dist/
   artifacts:
     baseDirectory: dist
     files:
       - '**/*'
   customHeaders:
+    - pattern: '**/*.js'
+      headers:
+        - key: 'Content-Type'
+          value: 'application/javascript'
+    - pattern: '**/*.mjs'
+      headers:
+        - key: 'Content-Type'
+          value: 'application/javascript'
+    - pattern: '**/*.css'
+      headers:
+        - key: 'Content-Type'
+          value: 'text/css'
+    - pattern: '**/*.json'
+      headers:
+        - key: 'Content-Type'
+          value: 'application/json'
+    - pattern: '_astro/**/*.js'
+      headers:
+        - key: 'Content-Type'
+          value: 'application/javascript'
     - pattern: '**/*'
       headers:
         - key: 'Cache-Control'
