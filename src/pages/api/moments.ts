@@ -5,11 +5,7 @@ import path from 'path';
 import sharp from 'sharp';
 
 const s3Client = new S3Client({
-  region: 'us-east-1',
-  credentials: {
-    accessKeyId: process.env.S3_ACCESS_KEY_ID || '',
-    secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || ''
-  },
+  region: 'us-east-1'
 });
 
 const BUCKET_NAME = 'brett-website-bucket';
