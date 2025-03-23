@@ -14,6 +14,12 @@ frontend:
     baseDirectory: dist
     files:
       - '**/*'
+    disableGeneratedBaseDirectory: true
+  customHeaders:
+    - pattern: '**/*'
+      headers:
+        - key: 'Cache-Control'
+          value: 'no-cache'
   cache:
     paths:
       - node_modules/**/* 
