@@ -14,6 +14,7 @@ frontend:
       commands:
         - cp -r platform dist/
         - cp package.json dist/
+        - cp src/entry.js dist/
   artifacts:
     baseDirectory: dist
     files:

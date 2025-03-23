@@ -1,4 +1,4 @@
-import { handler } from './dist/server/entry.mjs';
+import { handler } from './server/entry.mjs';
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -18,14 +18,7 @@ app.use((req, res, next) => {
 });
 
 // Handle all routes with Astro
-app.use(async (req, res, next) => {
-  try {
-    await handler(req, res, next);
-  } catch (error) {
-    console.error('Handler error:', error);
-    next(error);
-  }
-});
+app.use(handler);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
