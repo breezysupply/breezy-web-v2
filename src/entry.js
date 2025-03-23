@@ -2,6 +2,7 @@ import { handler } from './server/entry.mjs';
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import fs from 'fs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -31,6 +32,7 @@ try {
   // Enhanced request logging
   app.use((req, res, next) => {
     const start = Date.now();
+    console.log(`Request started: ${req.method} ${req.url}`);
     res.on('finish', () => {
       const duration = Date.now() - start;
       console.log(
@@ -51,6 +53,16 @@ try {
 
   // IMPORTANT: Serve static files from the client directory with correct path
   app.use(express.static(path.join(__dirname, 'client')));
+  
+  // Special handling for direct HTML requests
+  app.get('/*.html', (req, res, next) => {
+    const htmlPath = path.join(__dirname, 'client', req.path);
+    if (fs.existsSync(htmlPath)) {
+      res.sendFile(htmlPath);
+    } else {
+      next();
+    }
+  });
   
   // Handle all routes with Astro handler
   app.use(handler);

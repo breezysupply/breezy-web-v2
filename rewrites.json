@@ -1,0 +1,15 @@
+[
+  {
+    "source": "/api/<**>",
+    "destination": "/api/:splat"
+  },
+  {
+    "source": "/<*>",
+    "destination": "/:splat",
+    "condition": {
+      "resourcePath": {
+        "is": "/<*>"
+      }
+    }
+  }
+] 
