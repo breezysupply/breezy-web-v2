@@ -1,0 +1,51 @@
+---
+import Layout from '../layouts/Layout.astro';
+import AppWrapper from '../components/AppWrapper';
+import NotesContainer from '../components/NotesContainer';
+import fs from 'fs/promises';
+import path from 'path';
+
+// Get notes data
+const notesPath = path.join(process.cwd(), 'src/data/notes.json');
+const notesData = await fs.readFile(notesPath, 'utf-8');
+const notes = JSON.parse(notesData);
+
+const description = "Just my 2 cents";
+---
+
+<Layout title="Notes - KPRKR">
+  <AppWrapper client:load>
+    <main class="ml-64 mr-64 p-8">
+      <div class="max-w-2xl mx-auto">
+        <h1 class="text-2xl mb-4">Notes</h1>
+        <div class="mb-12 opacity-50">
+          {description}
+        </div>
+        <NotesContainer notes={notes} client:load />
+      </div>
+    </main>
+  </AppWrapper>
+</Layout>
+
+<script>
+  // Handle theme updates
+  const notesContainer = document.querySelector('.notes-wrapper');
+  if (notesContainer) {
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.target instanceof HTMLElement) {
+          const theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+          const notesComponent = notesContainer.querySelector('[data-theme]');
+          if (notesComponent) {
+            notesComponent.setAttribute('data-theme', theme);
+          }
+        }
+      });
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class']
+    });
+  }
+</script> 

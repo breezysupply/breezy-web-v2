@@ -1,0 +1,97 @@
+---
+import Layout from '../layouts/Layout.astro';
+import AppWrapper from '../components/AppWrapper';
+
+// Remove the JSX function and use a regular function that returns a string array
+const renderSkills = (skillList: string[]) => skillList;
+---
+
+<Layout title="Work - KPRKR">
+  <AppWrapper client:load>
+    <main class="ml-64 mr-64 p-8">
+      <div class="max-w-3xl">
+        <h1 class="text-2xl mb-8">Work</h1>
+        
+        <div class="space-y-12">
+          <section class="opacity-80">
+            <h2 class="text-sm uppercase tracking-wider opacity-50 mb-4">About ¬</h2>
+            <p class="leading-relaxed">
+              Cloud engineer that loves to continuously learn. Currently apart of the managed operations team at AWS. 
+              I also run a couple of companies: Sample Surplus & Barrage800. Sample Surplus is a streetwear brand that 
+              serves as my creative outlet. Barrage800 is a technical apparel brand with the focus on durable, performance hats.
+            </p>
+          </section>
+
+          <section>
+            <h2 class="text-sm uppercase tracking-wider opacity-50 mb-8">Experience</h2>
+            
+            <div class="space-y-8">
+              <div>
+                <h3 class="text-lg font-medium">Owner at Barrage800</h3>
+                <p class="text-sm opacity-50 mb-2">CURRENT</p>
+                <p class="opacity-80">Owner and designer for Barrage800. This brand is the culmination of all the connections and experience I've had in the apparel industry. With the focus on the skateboarding niche and developing apparel (specifically hats), that functions and operates as a daily carry item.</p>
+                <div class="flex flex-wrap gap-2 mt-3">
+                  {['Adobe Photoshop', 'Adobe Illustrator', 'Shopify', 'Meta Ads'].map(skill => (
+                    <span class="px-2 py-1 bg-gray-800/30 rounded-sm text-sm">{skill}</span>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <h3 class="text-lg font-medium">Cloud Engineer at Amazon Web Services</h3>
+                <p class="text-sm opacity-50 mb-2">CURRENT</p>
+                <p class="opacity-80">Cloud engineer part of the managed operations team, currently working with several service teams for KTLO operations.</p>
+                <div class="flex flex-wrap gap-2 mt-3">
+                  {['Internal AWS tooling', 'Linux', 'AWS Console'].map(skill => (
+                    <span class="px-2 py-1 bg-gray-800/30 rounded-sm text-sm">{skill}</span>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <h3 class="text-lg font-medium">Owner at Sample Surplus</h3>
+                <p class="text-sm opacity-50 mb-2">CURRENT</p>
+                <p class="opacity-80">Owner and designer for Sample Surplus. I use this brand as a medium of creative freedom and a therapeutic outlet.</p>
+                <div class="flex flex-wrap gap-2 mt-3">
+                  {['Adobe Photoshop', 'Adobe Illustrator', 'Shopify', 'Meta Ads'].map(skill => (
+                    <span class="px-2 py-1 bg-gray-800/30 rounded-sm text-sm">{skill}</span>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <h3 class="text-lg font-medium">Media Consultant at CACI</h3>
+                <p class="opacity-80">Media Consultant for government organization, helped build and bring client requests to life by acting as a conduit between the client and the creative teams.</p>
+                <div class="flex flex-wrap gap-2 mt-3">
+                  {['Adobe Creative Cloud', 'Workamajig'].map(skill => (
+                    <span class="px-2 py-1 bg-gray-800/30 rounded-sm text-sm">{skill}</span>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <h3 class="text-lg font-medium">Cyber Threat Analyst at Booz Allen Hamilton</h3>
+                <p class="opacity-80">Cyber threat analyst responsible for tracking Advanced Persistent Threat actors by leveraging data and events across multiple sources.</p>
+                <div class="flex flex-wrap gap-2 mt-3">
+                  {['Apktool'].map(skill => (
+                    <span class="px-2 py-1 bg-gray-800/30 rounded-sm text-sm">{skill}</span>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <h3 class="text-lg font-medium">Signals Intelligence Analyst at U.S. Army</h3>
+                <p class="opacity-80">Served as a Signals intelligence analyst across both strategic and tactical domains. Provided special operations support and multiple combat deployments. Staff Sergeant.</p>
+                <div class="flex flex-wrap gap-2 mt-3">
+                  {['Classified'].map(skill => (
+                    <span class="px-2 py-1 bg-gray-800/30 rounded-sm text-sm">{skill}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+  </AppWrapper>
+</Layout> 

@@ -1,0 +1,22 @@
+---
+import Layout from '../layouts/Layout.astro';
+import AppWrapper from '../components/AppWrapper';
+import TrainingWrapper from '../components/TrainingWrapper';
+import { readFileSync } from 'fs';
+import path from 'path';
+
+const TRAINING_FILE = path.join(process.cwd(), 'src/data/training.json');
+const entries = JSON.parse(readFileSync(TRAINING_FILE, 'utf-8'));
+---
+
+<Layout title="Training - KPRKR">
+  <AppWrapper client:load>
+    <main class="ml-64 mr-64 p-8">
+      <div class="max-w-2xl mx-auto">
+        <h1 class="text-2xl mb-4">Training</h1>
+        <p class="mb-12 opacity-50">Tracking my fitness journey and workout progress.</p>
+        <TrainingWrapper entries={entries} client:load />
+      </div>
+    </main>
+  </AppWrapper>
+</Layout> 

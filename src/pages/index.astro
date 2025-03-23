@@ -1,11 +1,33 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import AppWrapper from '../components/AppWrapper';
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="KPRKR">
+	<AppWrapper client:load>
+		<main class="ml-64 mr-64 p-8">
+			<div class="max-w-2xl mx-auto">
+				<div class="space-y-8">
+					<section>
+						<h2 class="text-sm uppercase tracking-wider opacity-50 mb-2">Name</h2>
+						<p class="text-2xl">Brett Pierce</p>
+					</section>
+
+					<section>
+						<h2 class="text-sm uppercase tracking-wider opacity-50 mb-2">Work</h2>
+						<p>Cloud Engineer at Amazon Web Services</p>
+						<p class="mt-2">Also a small business owner: <a href="https://www.sample-surplus.com" target="_blank">Sample Surplus</a> & <a href="https://www.barrage800.com" target="_blank">Barrage800</a></p>
+					</section>
+
+					<section>
+						<h2 class="text-sm uppercase tracking-wider opacity-50 mb-2">Version</h2>
+						<p class="font-mono">2.0.0-alpha</p>
+					</section>
+				</div>
+			</div>
+		</main>
+	</AppWrapper>
 </Layout>

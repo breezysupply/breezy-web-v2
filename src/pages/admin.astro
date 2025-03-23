@@ -1,0 +1,13 @@
+---
+import Layout from '../layouts/Layout.astro';
+import AppWrapper from '../components/AppWrapper';
+import AdminConsole from '../components/AdminConsole';
+---
+
+<Layout title="Admin - KPRKR">
+  <AppWrapper client:load>
+    <main class="ml-64 mr-64 p-8">
+      <AdminConsole client:load />
+    </main>
+  </AppWrapper>
+</Layout> 
