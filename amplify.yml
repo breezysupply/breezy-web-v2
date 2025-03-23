@@ -32,6 +32,10 @@ frontend:
     - pattern: '/api/*'
       target: '/api/:splat'
       status: '200'
+    - pattern: '/**'
+      target: '/index.html'
+      status: '200'
+      condition: 'isFile=false'
   cache:
     paths:
       - node_modules/**/*

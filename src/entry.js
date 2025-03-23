@@ -24,7 +24,7 @@ console.log('Environment:', {
   HOST: host,
   __dirname,
   cwd: process.cwd(),
-  staticPath: path.join(__dirname, '../client')
+  staticPath: path.join(__dirname, 'client')
 });
 
 try {
@@ -49,10 +49,10 @@ try {
     next();
   });
 
-  // Serve static files from the client directory
-  app.use(express.static(path.join(__dirname, '../client')));
-
-  // Handle all routes with Astro
+  // IMPORTANT: Serve static files from the client directory with correct path
+  app.use(express.static(path.join(__dirname, 'client')));
+  
+  // Handle all routes with Astro handler
   app.use(handler);
 
   // Error handling middleware
