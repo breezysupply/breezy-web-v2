@@ -10,12 +10,14 @@ frontend:
     build:
       commands:
         - npm run build
+    postBuild:
+      commands:
+        - cp -r platform dist/
+        - cp package.json dist/
   artifacts:
     baseDirectory: dist
     files:
       - '**/*'
-      - '../server.js'
-      - '../package.json'
     disableGeneratedBaseDirectory: true
   customHeaders:
     - pattern: '**/*'

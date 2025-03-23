@@ -1,6 +1,6 @@
 {
   "hosting": {
     "type": "ssr",
-    "entrypoint": "platform/server.js"
+    "entrypoint": "src/entry.js"
   }
 } 
