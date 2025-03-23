@@ -1,0 +1,6 @@
+{
+  "hosting": {
+    "type": "ssr",
+    "entrypoint": "server.js"
+  }
+} 
