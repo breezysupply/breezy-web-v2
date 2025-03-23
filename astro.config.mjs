@@ -12,8 +12,8 @@ export default defineConfig({
     mode: 'standalone'
   }),
   build: {
-    client: 'dist/client',
-    server: 'dist/server',
+    client: './client',
+    server: './server',
     serverEntry: 'entry.mjs'
   },
   site: 'https://your-site-url.com', // Add your site URL here
