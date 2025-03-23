@@ -7,5 +7,7 @@ import tailwind from '@astrojs/tailwind';
 export default defineConfig({
   integrations: [react(), tailwind()],
   output: 'static',
-  site: 'https://your-site-url.com', // Add your site URL here
+  build: {
+    format: 'file'
+  }
 });
