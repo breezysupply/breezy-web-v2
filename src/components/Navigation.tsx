@@ -15,9 +15,9 @@ const Navigation = () => {
     return () => clearInterval(timer);
   }, []);
 
-  const textColor = theme === 'light' ? 'text-gray-800' : 'text-white';
+  const textColor = theme === 'light' ? 'text-gray-900' : 'text-white';
   const hoverColor = theme === 'light' ? 'hover:text-gray-600' : 'hover:text-gray-300';
-  const activeColor = theme === 'light' ? 'text-black font-medium' : 'text-white font-medium';
+  const activeColor = theme === 'light' ? 'text-gray-900 font-medium' : 'text-white font-medium';
 
   const isCurrentPage = (path: string) => currentPath === path;
 

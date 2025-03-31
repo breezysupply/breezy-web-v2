@@ -7,7 +7,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "start": "node src/entry.js"
+    "start": "node src/entry.js",
+    "deploy": "npm run build && firebase deploy"
   },
   "dependencies": {
     "@astrojs/node": "^8.2.3",
